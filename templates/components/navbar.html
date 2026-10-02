@@ -1,0 +1,27 @@
+<!-- TOP NAVBAR COMPONENT -->
+<header class="navbar">
+    <a href="/" class="navbar-brand">
+        <div class="logo-icon">⚡</div>
+        <div class="brand-text">
+            <span class="brand-title">PyCode Arena</span>
+            <span class="brand-subtitle">Treino Edition</span>
+        </div>
+    </a>
+
+    <div class="navbar-actions">
+        <a href="/historico" class="user-profile-badge" id="userBadge" title="Ver Histórico de Conclusões">
+            <div class="avatar" id="userAvatar">{{ (session_user.name[0] if session_user and session_user.name else (session_user.username[0] if session_user and session_user.username else 'U')) | upper }}</div>
+            <div class="user-info">
+                <span class="user-name" id="currentUserName">{{ session_user.name if session_user and session_user.name else (session_user.username if session_user and session_user.username else 'Desenvolvedor') }}</span>
+                <span class="user-stats" id="userStatsText">{{ session_user.passed_count if session_user and session_user.passed_count is not none else 0 }} / {{ session_user.total_exercises if session_user and session_user.total_exercises else 30 }} Concluídos 📜</span>
+            </div>
+        </a>
+        <a href="/historico" class="btn btn-secondary" id="btnHistory">📜 Histórico</a>
+        <a href="/ranking" class="btn btn-secondary" id="btnRanking">🏆 Ranking</a>
+        <button class="btn btn-danger" onclick="handleLogout()" id="btnLogout" title="Encerrar Sessão">🚪 Sair</button>
+    </div>
+</header>
+
+
+
+

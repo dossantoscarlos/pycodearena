@@ -1,0 +1,67 @@
+<!-- TELA 2: WORKSPACE DO EDITOR COMPONENT (SPLIT VIEW) -->
+<section id="viewEditor" class="view-screen">
+    <div class="editor-header-bar">
+        <button class="btn btn-secondary btn-back" onclick="showListView()">
+            ← Voltar para Exercícios
+        </button>
+
+        <div class="editor-header-title">
+            <h2 id="problemTitle">Exercício</h2>
+            <span class="badge" id="problemLevelBadge">Iniciante</span>
+            <span class="concept-badge" id="problemConceptBadge">📌 Conceito</span>
+        </div>
+
+        <div class="status-indicator" id="problemStatusIndicator">
+            <span class="dot"></span> <span id="statusText">Pendente</span>
+        </div>
+    </div>
+
+    <main class="editor-workspace">
+        <!-- COLUNA DA ESQUERDA: DESCRIÇÃO DO EXERCÍCIO -->
+        <aside class="problem-panel">
+            <div class="problem-body markdown-rendered" id="problemDescription">
+                Carregando detalhes do exercício...
+            </div>
+        </aside>
+
+        <!-- COLUNA DO CENTRO E PAINEL INFERIOR -->
+        <div class="editor-right-col">
+            <!-- MONACO EDITOR -->
+            <div class="editor-panel">
+                <div class="editor-toolbar">
+                    <div class="editor-title">
+                        <span class="icon">🐍</span> <span>Solução Python (solucao.py)</span>
+                        <span class="editor-hint">Autocomplete Ctrl+Space / Tab</span>
+                    </div>
+                    <div class="editor-actions">
+                        <button class="btn btn-sm btn-ghost" onclick="resetCodeTemplate()" title="Restaurar template original">🔄 Resetar</button>
+                        <button class="btn btn-secondary btn-run" onclick="runTests()" id="btnRunTests">
+                            <span class="play-icon">▶</span> Executar Testes
+                        </button>
+                        <button class="btn btn-primary btn-submit hidden" onclick="submitSolution()" id="btnSubmit">
+                            🚀 Submeter Solução
+                        </button>
+                    </div>
+                </div>
+
+                <div class="editor-container">
+                    <div id="monacoEditorContainer"></div>
+                </div>
+            </div>
+
+            <!-- TERMINAL INFERIOR DE RESULTADOS -->
+            <div class="console-panel" id="consolePanel">
+                <div class="console-header">
+                    <span class="console-title">🖥️ Terminal de Resultados & Testes Unitários</span>
+                    <span class="execution-time" id="executionTime">-- ms</span>
+                </div>
+
+                <div class="console-status-banner" id="statusBanner">
+                    Clique em "Executar Testes" para avaliar sua solução contra a suíte de teste unitário.
+                </div>
+
+                <pre class="console-output" id="consoleOutput">// Aguardando execução dos testes...</pre>
+            </div>
+        </div>
+    </main>
+</section>

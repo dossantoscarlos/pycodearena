@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyCode Arena - Plataforma de Algoritmos & Testes Unitários</title>
+    <meta name="description" content="Plataforma de desafios de algoritmos em Python com avaliação de testes unitários em tempo real estilo HackerRank.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    
+    <!-- Marked.js para Renderização de Markdown Educacional -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Monaco Editor CDN Loader -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+</head>
+<body>
+    <div id="app" class="app-container">
+        <!-- TOP NAVBAR -->
+        <header class="navbar">
+            <div class="navbar-brand">
+                <div class="logo-icon">⚡</div>
+                <div class="brand-text">
+                    <span class="brand-title">PyCode Arena</span>
+                    <span class="brand-subtitle">Treino Edition</span>
+                </div>
+            </div>
+
+            <div class="navbar-actions">
+                <div class="user-profile-badge" id="userBadge" onclick="openUserModal()">
+                    <div class="avatar" id="userAvatar">U</div>
+                    <div class="user-info">
+                        <span class="user-name" id="currentUserName">Desenvolvedor</span>
+                        <span class="user-stats" id="userStatsText">0 / 30 Concluídos</span>
+                    </div>
+                </div>
+                <button class="btn btn-secondary" onclick="openUserModal()" id="btnSwitchUser">+ Criar Usuário</button>
+            </div>
+        </header>
+
+        <!-- TELA 1: LISTA DE EXERCÍCIOS (DASHBOARD GRID) -->
+        <section id="viewList" class="view-screen active">
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <div class="dashboard-title-group">
+                        <h2>Catálogo de Exercícios de Algoritmos</h2>
+                        <p>Escolha um exercício abaixo para abrir o editor e resolver o desafio.</p>
+                    </div>
+
+                    <div class="dashboard-controls">
+                        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Pesquisar exercício por nome ou palavra-chave..." oninput="renderExerciseGrid()">
+                        <div class="filter-pills">
+                            <button class="pill active" data-filter="todos" onclick="filterLevel('todos')">Todos (30)</button>
+                            <button class="pill" data-filter="Iniciante" onclick="filterLevel('Iniciante')">Iniciante</button>
+                            <button class="pill" data-filter="Intermediario" onclick="filterLevel('Intermediario')">Intermediário</button>
+                            <button class="pill" data-filter="Avancado" onclick="filterLevel('Avancado')">Avançado</button>
+                        </div>
+                    </div>
+                </div>
+
+                <main class="exercise-grid" id="exerciseGrid">
+                    <!-- Gerado dinamicamente via JS -->
+                </main>
+            </div>
+        </section>
+
+        <!-- TELA 2: WORKSPACE DO EDITOR (SPLIT VIEW) -->
+        <section id="viewEditor" class="view-screen">
+            <div class="editor-header-bar">
+                <button class="btn btn-secondary btn-back" onclick="showListView()">
+                    ← Voltar para Exercícios
+                </button>
+
+                <div class="editor-header-title">
+                    <h2 id="problemTitle">Exercício</h2>
+                    <span class="badge" id="problemLevelBadge">Iniciante</span>
+                    <span class="concept-badge" id="problemConceptBadge">📌 Conceito</span>
+                </div>
+
+                <div class="status-indicator" id="problemStatusIndicator">
+                    <span class="dot"></span> <span id="statusText">Pendente</span>
+                </div>
+            </div>
+
+            <main class="editor-workspace">
+                <!-- COLUNA DA ESQUERDA: DESCRIÇÃO DO EXERCÍCIO -->
+                <aside class="problem-panel">
+                    <div class="problem-body markdown-rendered" id="problemDescription">
+                        Carregando detalhes do exercício...
+                    </div>
+                </aside>
+
+                <!-- COLUNA DO CENTRO E PAINEL INFERIOR -->
+                <div class="editor-right-col">
+                    <!-- MONACO EDITOR -->
+                    <div class="editor-panel">
+                        <div class="editor-toolbar">
+                            <div class="editor-title">
+                                <span class="icon">🐍</span> <span>Solução Python (solucao.py)</span>
+                                <span class="editor-hint">Autocomplete Ctrl+Space / Tab</span>
+                            </div>
+                            <div class="editor-actions">
+                                <button class="btn btn-sm btn-ghost" onclick="resetCodeTemplate()" title="Restaurar template original">🔄 Resetar</button>
+                                <button class="btn btn-secondary btn-run" onclick="runTests()" id="btnRunTests">
+                                    <span class="play-icon">▶</span> Executar Testes
+                                </button>
+                                <button class="btn btn-primary btn-submit hidden" onclick="submitSolution()" id="btnSubmit">
+                                    🚀 Submeter Solução
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="editor-container">
+                            <div id="monacoEditorContainer"></div>
+                        </div>
+                    </div>
+
+                    <!-- TERMINAL INFERIOR DE RESULTADOS -->
+                    <div class="console-panel" id="consolePanel">
+                        <div class="console-header">
+                            <span class="console-title">🖥️ Terminal de Resultados & Testes Unitários</span>
+                            <span class="execution-time" id="executionTime">-- ms</span>
+                        </div>
+
+                        <div class="console-status-banner" id="statusBanner">
+                            Clique em "Executar Testes" para avaliar sua solução contra a suíte de teste unitário.
+                        </div>
+
+                        <pre class="console-output" id="consoleOutput">// Aguardando execução dos testes...</pre>
+                    </div>
+                </div>
+            </main>
+        </section>
+    </div>
+
+    <!-- MODAL DE CADASTRO/TROCA DE USUÁRIO -->
+    <div class="modal-overlay" id="userModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Criar / Alternar Usuário</h3>
+                <button class="btn-close" onclick="closeUserModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="userForm" onsubmit="handleCreateUser(event)">
+                    <div class="form-group">
+                        <label for="inputUsername">Username (Nome de Usuário)*</label>
+                        <input type="text" id="inputUsername" class="form-control" placeholder="ex: dev_eduardo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputName">Nome Completo</label>
+                        <input type="text" id="inputName" class="form-control" placeholder="ex: Eduardo Silva">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Salvar Usuário</button>
+                </form>
+
+                <hr class="divider">
+
+                <div class="existing-users-section">
+                    <h4>Usuários Registrados</h4>
+                    <div class="user-list" id="existingUsersList">
+                        <!-- Carregado via JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

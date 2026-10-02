@@ -1,0 +1,26 @@
+<!-- TELA 1: LISTA DE EXERCÍCIOS COMPONENT (DASHBOARD GRID) -->
+<section id="viewList" class="view-screen active">
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <div class="dashboard-title-group">
+                <h2>Catálogo de Exercícios de Algoritmos</h2>
+                <p>Escolha um exercício abaixo para abrir o editor e resolver o desafio.</p>
+            </div>
+
+            <div class="dashboard-controls">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Pesquisar exercício por nome ou palavra-chave..." oninput="renderExerciseGrid()">
+                <div class="filter-pills">
+                    <button class="pill active" data-filter="todos" onclick="filterLevel('todos')">Todos (30)</button>
+                    <button class="pill" data-filter="Iniciante" onclick="filterLevel('Iniciante')">Iniciante</button>
+                    <button class="pill" data-filter="Intermediario" onclick="filterLevel('Intermediario')">Intermediário</button>
+                    <button class="pill" data-filter="Avancado" onclick="filterLevel('Avancado')">Avançado</button>
+                    <button class="pill pill-success" data-filter="concluidos" onclick="filterLevel('concluidos')">✓ Concluídos</button>
+                </div>
+            </div>
+        </div>
+
+        <main class="exercise-grid" id="exerciseGrid">
+            <!-- Gerado dinamicamente via JS -->
+        </main>
+    </div>
+</section>

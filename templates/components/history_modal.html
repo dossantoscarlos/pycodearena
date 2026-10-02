@@ -1,0 +1,26 @@
+<!-- MODAL DE HISTÓRICO DE SUBMISSÕES DO USUÁRIO -->
+<div class="modal-overlay" id="historyModal">
+    <div class="modal-card modal-large">
+        <div class="modal-header">
+            <div class="modal-title-group">
+                <h3>📜 Histórico de Exercícios & Submissões</h3>
+                <p class="modal-subtitle">Acompanhe todas as suas submissões e resoluções gravadas.</p>
+            </div>
+            <button class="btn-close" onclick="closeHistoryModal()">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="history-controls">
+                <div class="filter-pills">
+                    <button class="pill active" data-history-filter="todos" onclick="filterHistory('todos')">Todas Submissões</button>
+                    <button class="pill" data-history-filter="concluidos" onclick="filterHistory('concluidos')">✓ Concluídos</button>
+                    <button class="pill" data-history-filter="falhas" onclick="filterHistory('falhas')">❌ Falhas</button>
+                </div>
+                <span class="history-count-badge" id="historyCountText">0 submissões</span>
+            </div>
+
+            <div class="history-list" id="historyListContainer">
+                <!-- Carregado dinamicamente via JS -->
+            </div>
+        </div>
+    </div>
+</div>

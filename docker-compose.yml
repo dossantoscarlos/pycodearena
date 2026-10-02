@@ -1,0 +1,28 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: starlete_app
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - SECRET_KEY=PyCodeArena_Secret_Key_Default_9931
+      - ENCRYPTION_SALT=PyCodeArena_Default_Secure_Salt_2026
+    # Limitações de Recursos Exigidas pelo Usuário: 512MB RAM, 0.5 CPU e 1GB de Armazenamento
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
+        reservations:
+          cpus: "0.25"
+          memory: 256M
+    # Compatibilidade com v2/v3 e Docker Compose CLI
+    mem_limit: 512m
+    cpus: 0.5
+    # Limita o armazenamento temporário de execução em 1GB (1073741824 bytes)
+    tmpfs:
+      - /tmp:size=1073741824
+    restart: unless-stopped

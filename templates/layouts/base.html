@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PyCode Arena - Plataforma de Algoritmos & Testes Unitários{% endblock %}</title>
+    <meta name="description" content="Plataforma de desafios de algoritmos em Python com avaliação de testes unitários em tempo real estilo HackerRank.">
+    <meta name="theme-color" content="#0f172a">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css?v=8">
+    
+    <!-- Marked.js para Renderização de Markdown -->
+    <script src="/static/marked.min.js"></script>
+    
+    <!-- Monaco Editor Loader Local -->
+    <script src="/static/vs/loader.js"></script>
+    
+    <!-- Sessão Injetada pelo Backend Starlette -->
+    <script id="server-session-data" type="application/json">
+        {% if session_user %}{{ session_user | tojson }}{% else %}null{% endif %}
+    </script>
+    <script>
+        window.SERVER_SESSION_USER = JSON.parse(document.getElementById('server-session-data').textContent);
+    </script>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div id="app" class="app-container">
+        {% include "components/navbar.html" %}
+        
+        {% block content %}
+            {% include "components/auth_view.html" %}
+            {% include "components/exercise_list.html" %}
+            {% include "components/editor_workspace.html" %}
+            {% include "components/history_view.html" %}
+        {% endblock %}
+    </div>
+
+    {% include "components/user_modal.html" %}
+
+    <script src="/static/app.js?v=9"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

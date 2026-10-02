@@ -1,0 +1,73 @@
+<!-- MODAL DE AUTENTICAÇÃO E GESTÃO DE USUÁRIO -->
+<div class="modal-overlay" id="userModal">
+    <div class="modal-card auth-modal">
+        <div class="modal-header">
+            <h3 id="modalAuthTitle">Autenticação do Desenvolvedor</h3>
+            <button class="btn-close" onclick="closeUserModal()">✕</button>
+        </div>
+
+        <div class="auth-tabs">
+            <button class="auth-tab active" id="tabBtnLogin" onclick="switchAuthTab('login')">🔑 Entrar</button>
+            <button class="auth-tab" id="tabBtnRegister" onclick="switchAuthTab('register')">📝 Cadastrar</button>
+            <button class="auth-tab" id="tabBtnRecover" onclick="switchAuthTab('recover')">🛠️ Recuperar</button>
+        </div>
+
+        <div class="modal-body">
+            <!-- ALERTA DE ERRO OU SUCESSO -->
+            <div id="authAlert" class="auth-alert hidden"></div>
+
+            <!-- FORMULÁRIO 1: LOGIN -->
+            <form id="loginForm" class="auth-form active" onsubmit="handleLoginSubmit(event)">
+                <div class="form-group">
+                    <label for="loginUsername">Username (Nome de Usuário)*</label>
+                    <input type="text" id="loginUsername" class="form-control" placeholder="ex: dev_eduardo" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Senha*</label>
+                    <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">🚀 Acessar Plataforma</button>
+                
+                <div class="auth-footer-link">
+                    <a href="javascript:void(0)" onclick="switchAuthTab('recover')">Esqueceu a senha ou e-mail?</a>
+                </div>
+            </form>
+
+            <!-- FORMULÁRIO 2: CADASTRO -->
+            <form id="registerForm" class="auth-form" onsubmit="handleRegisterSubmit(event)">
+                <div class="form-group">
+                    <label for="regUsername">Username (Único)*</label>
+                    <input type="text" id="regUsername" class="form-control" placeholder="ex: dev_eduardo" required autocomplete="username">
+                    <small class="form-help">Nome único usado para login.</small>
+                </div>
+                <div class="form-group">
+                    <label for="regName">Nome Completo</label>
+                    <input type="text" id="regName" class="form-control" placeholder="ex: Eduardo Silva">
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">E-mail de Recuperação*</label>
+                    <input type="email" id="regEmail" class="form-control" placeholder="ex: usuario@email.com" required autocomplete="email">
+                    <small class="form-help">🔒 Criptografado no banco SQLite usando a salt do .env.</small>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Senha*</label>
+                    <input type="password" id="regPassword" class="form-control" placeholder="Mínimo de 4 caracteres" required autocomplete="new-password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">✨ Criar Minha Conta</button>
+            </form>
+
+            <!-- FORMULÁRIO 3: RECUPERAÇÃO DE SENHA / E-MAIL -->
+            <form id="recoverForm" class="auth-form" onsubmit="handleRecoverSubmit(event)">
+                <p class="auth-desc">Informe seu <strong>Username único</strong> para consultar as informações de recuperação vinculadas à sua conta.</p>
+                
+                <div class="form-group">
+                    <label for="recoverUsername">Username Cadastrado*</label>
+                    <input type="text" id="recoverUsername" class="form-control" placeholder="ex: dev_eduardo" required>
+                </div>
+                <button type="submit" class="btn btn-secondary btn-block">🔍 Consultar E-mail Criptografado</button>
+                
+                <div id="recoverResult" class="recover-result-box hidden"></div>
+            </form>
+        </div>
+    </div>
+</div>

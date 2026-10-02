@@ -1,0 +1,45 @@
+<!-- TELA DE RANKING DE DESENVOLVEDORES -->
+<section id="viewRanking" class="view-screen active">
+    <div class="ranking-container">
+        <div class="ranking-header">
+            <div class="ranking-title-group">
+                <h2>🏆 Leaderboard & Ranking por Nível</h2>
+                <p>Veja quem lidera a plataforma resolvendo a maior quantidade de exercícios de algoritmos.</p>
+            </div>
+            <div class="ranking-header-actions">
+                <a href="/" class="btn btn-secondary btn-back">
+                    ← Voltar para Exercícios
+                </a>
+            </div>
+        </div>
+
+        <!-- PÓDIO TOP 3 -->
+        <div class="podium-section" id="podiumContainer">
+            <!-- Carregado dinamicamente via JS -->
+        </div>
+
+        <!-- TABELA COMPLETA DE CLASSIFICAÇÃO -->
+        <div class="ranking-table-card">
+            <div class="table-header">
+                <h3>Classificação Geral</h3>
+                <span class="ranking-count-badge" id="rankingUserCount">0 Desenvolvedores</span>
+            </div>
+            <div class="table-responsive">
+                <table class="ranking-table">
+                    <thead>
+                        <tr>
+                            <th>Posição</th>
+                            <th>Desenvolvedor</th>
+                            <th>Total Concluído</th>
+                            <th>Detalhamento por Nível</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rankingTableBody">
+                        <!-- Carregado dinamicamente via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

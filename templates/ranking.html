@@ -1,0 +1,17 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Ranking de Desenvolvedores - PyCode Arena{% endblock %}
+
+{% block content %}
+    {% include "components/ranking_view.html" %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof fetchRanking === 'function') {
+            fetchRanking();
+        }
+    });
+</script>
+{% endblock %}

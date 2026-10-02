@@ -1,0 +1,28 @@
+<!-- TELA 3: HISTÓRICO DE SUBMISSÕES (FULL PAGE VIEW) -->
+<section id="viewHistory" class="view-screen active">
+    <div class="history-page-container">
+        <div class="history-page-header">
+            <div class="history-header-top">
+                <a href="/" class="btn btn-secondary btn-back">
+                    ← Voltar para Exercícios
+                </a>
+                <div class="history-title-group">
+                    <h2>📜 Histórico de Submissões & Código Fonte</h2>
+                    <p>Veja todas as suas resoluções salvas e o código Python submetido em cada tentativa.</p>
+                </div>
+            </div>
+
+            <div class="history-controls">
+                <div class="filter-pills">
+                    <button class="pill active" data-history-filter="todos" onclick="filterHistory('todos')">Todas Submissões</button>
+                    <button class="pill pill-success" data-history-filter="concluidos" onclick="filterHistory('concluidos')">✓ Concluídos</button>
+                </div>
+                <span class="history-count-badge" id="historyCountText">0 submissões</span>
+            </div>
+        </div>
+
+        <main class="history-page-content" id="historyListContainer">
+            <!-- Carregado via JS -->
+        </main>
+    </div>
+</section>

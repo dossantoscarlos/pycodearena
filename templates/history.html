@@ -1,0 +1,17 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Histórico de Submissões - PyCode Arena{% endblock %}
+
+{% block content %}
+    {% include "components/history_view.html" %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof fetchUserHistory === 'function') {
+            fetchUserHistory();
+        }
+    });
+</script>
+{% endblock %}

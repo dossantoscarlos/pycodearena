@@ -1,0 +1,76 @@
+<!-- TELA DE AUTENTICAÇÃO PRINCIPAL (LOGIN & REGISTRO) -->
+<section id="viewAuth" class="view-screen active">
+    <div class="auth-page-container">
+        <div class="auth-page-card">
+            <div class="auth-page-header">
+                <div class="auth-logo">⚡</div>
+                <h2>PyCode Arena</h2>
+                <p>Plataforma de desafios de algoritmos e testes unitários Python.</p>
+            </div>
+
+            <div class="auth-page-tabs">
+                <button class="auth-page-tab active" id="pageTabLogin" onclick="switchAuthPageTab('login')">🔑 Entrar</button>
+                <button class="auth-page-tab" id="pageTabRegister" onclick="switchAuthPageTab('register')">📝 Cadastrar</button>
+                <button class="auth-page-tab" id="pageTabRecover" onclick="switchAuthPageTab('recover')">🛠️ Recuperar</button>
+            </div>
+
+            <div class="auth-page-body">
+                <!-- ALERTA DE ERRO / SUCESSO DE AUTENTICAÇÃO -->
+                <div id="pageAuthAlert" class="auth-alert hidden"></div>
+
+                <!-- FORMULÁRIO 1: LOGIN -->
+                <form id="pageLoginForm" class="auth-form active" onsubmit="handleLoginSubmit(event)">
+                    <div class="form-group">
+                        <label for="loginUsername">Username (Nome de Usuário)*</label>
+                        <input type="text" id="loginUsername" class="form-control" placeholder="ex: dev_eduardo" required autocomplete="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Senha*</label>
+                        <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">🚀 Acessar Plataforma</button>
+                    
+                    <div class="auth-footer-link">
+                        <a href="javascript:void(0)" onclick="switchAuthPageTab('recover')">Esqueceu a senha ou e-mail?</a>
+                    </div>
+                </form>
+
+                <!-- FORMULÁRIO 2: CADASTRO -->
+                <form id="pageRegisterForm" class="auth-form" onsubmit="handleRegisterSubmit(event)">
+                    <div class="form-group">
+                        <label for="regUsername">Username (Único)*</label>
+                        <input type="text" id="regUsername" class="form-control" placeholder="ex: dev_eduardo" required autocomplete="username">
+                        <small class="form-help">Nome único usado para login na plataforma.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="regName">Nome Completo</label>
+                        <input type="text" id="regName" class="form-control" placeholder="ex: Eduardo Silva">
+                    </div>
+                    <div class="form-group">
+                        <label for="regEmail">E-mail de Recuperação*</label>
+                        <input type="email" id="regEmail" class="form-control" placeholder="ex: usuario@email.com" required autocomplete="email">
+                        <small class="form-help">🔒 Criptografado no banco SQLite usando a salt do .env.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="regPassword">Senha*</label>
+                        <input type="password" id="regPassword" class="form-control" placeholder="Mínimo de 4 caracteres" required autocomplete="new-password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">✨ Criar Minha Conta</button>
+                </form>
+
+                <!-- FORMULÁRIO 3: RECUPERAÇÃO -->
+                <form id="pageRecoverForm" class="auth-form" onsubmit="handleRecoverSubmit(event)">
+                    <p class="auth-desc">Informe seu <strong>Username único</strong> para consultar as informações de recuperação salvas no banco de dados.</p>
+                    
+                    <div class="form-group">
+                        <label for="recoverUsername">Username Cadastrado*</label>
+                        <input type="text" id="recoverUsername" class="form-control" placeholder="ex: dev_eduardo" required>
+                    </div>
+                    <button type="submit" class="btn btn-secondary btn-block">🔍 Consultar E-mail Criptografado</button>
+                    
+                    <div id="recoverResult" class="recover-result-box hidden"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
