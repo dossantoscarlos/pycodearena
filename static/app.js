@@ -328,8 +328,8 @@ function renderExerciseGrid() {
         card.onclick = () => showEditorView(ex.id);
 
         const badgeClass = `badge-${(ex.level || 'iniciante').toLowerCase()}`;
-        const statusIcon = ex.passed 
-            ? '<span class="status-check">✓ Concluído</span>' 
+        const statusIcon = ex.passed
+            ? '<span class="status-check">✓ Concluído</span>'
             : '<span style="color: var(--text-muted); font-size: 0.8rem;">Pendente</span>';
 
         card.innerHTML = `
@@ -390,7 +390,7 @@ async function runTests() {
             statusBanner.className = 'console-status-banner success';
             statusBanner.innerText = `TODOS OS TESTES PASSARAM! 🎉 - Clique no botão de submissão para salvar sua resposta no banco.`;
             consoleOutput.className = 'console-output success';
-            
+
             // Exibe e habilita o botão de Submeter Solução
             btnSubmit.classList.remove('hidden');
         } else {
@@ -562,7 +562,7 @@ function switchAuthPageTab(tabName) {
     const formLogin = document.getElementById('pageLoginForm') || document.getElementById('loginForm');
     const formRegister = document.getElementById('pageRegisterForm') || document.getElementById('registerForm');
     const formRecover = document.getElementById('pageRecoverForm') || document.getElementById('recoverForm');
-    
+
     hideAuthAlert();
 
     [tabLogin, tabRegister, tabRecover].forEach(t => t && t.classList.remove('active'));
@@ -728,9 +728,6 @@ async function handleRecoverSubmit(e) {
                     <div style="font-weight: 600; color: #10b981; margin-bottom: 0.4rem;">✓ Cadastro Localizado!</div>
                     <div><strong>Nome:</strong> ${data.name} (@${data.username})</div>
                     <div><strong>E-mail de Recuperação:</strong> <code>${data.masked_email}</code></div>
-                    <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem;">
-                        🔒 O e-mail foi descriptografado no servidor usando a chave <code>ENCRYPTION_SALT</code> do arquivo <code>.env</code>.
-                    </div>
                 `;
                 resultBox.classList.remove('hidden');
             }
@@ -758,7 +755,7 @@ function updateUserUI() {
         if (userNameElem) userNameElem.innerText = currentUser.name || currentUser.username;
         if (userAvatarElem) userAvatarElem.innerText = (currentUser.name || currentUser.username).charAt(0).toUpperCase();
         if (userStatsElem) userStatsElem.innerText = `${currentUser.passed_count || 0} / 30 Concluídos`;
-        
+
         if (userBadgeElem) userBadgeElem.style.display = 'flex';
         if (btnHistoryElem) btnHistoryElem.style.display = 'inline-flex';
         if (btnRankingElem) btnRankingElem.style.display = 'inline-flex';
@@ -798,7 +795,7 @@ function loadSavedUser() {
                 updateUserUI();
                 return true;
             }
-        } catch (e) {}
+        } catch (e) { }
     }
     currentUser = null;
     updateUserUI();
@@ -869,8 +866,8 @@ function renderHistoryList() {
         const historyCard = document.createElement('div');
         historyCard.className = `history-card-item ${item.passed ? 'passed' : 'failed'}`;
 
-        const statusBadge = item.passed 
-            ? '<span class="history-badge success">✓ Concluído</span>' 
+        const statusBadge = item.passed
+            ? '<span class="history-badge success">✓ Concluído</span>'
             : '<span class="history-badge danger">❌ Falha nos Testes</span>';
 
         const execTime = item.execution_time_ms ? `${item.execution_time_ms} ms` : '-- ms';
@@ -1050,9 +1047,9 @@ function renderRankingTable(data) {
                 </div>
             </td>
             <td>
-                ${isCurrent 
-                    ? '<span class="status-indicator passed"><span class="dot"></span> Ativo</span>' 
-                    : '<span style="color: var(--text-muted); font-size: 0.8rem;">Registrado</span>'}
+                ${isCurrent
+                ? '<span class="status-indicator passed"><span class="dot"></span> Ativo</span>'
+                : '<span style="color: var(--text-muted); font-size: 0.8rem;">Registrado</span>'}
             </td>
         `;
         tbody.appendChild(tr);
@@ -1060,7 +1057,7 @@ function renderRankingTable(data) {
 }
 
 // --- FEEDBACK VISUAL DE CLIQUE (RIPPLE EFFECT) ---
-document.addEventListener('click', function(e) {
+document.addEventListener('click', function (e) {
     const btn = e.target.closest('.btn, button, .auth-page-tab, .pill');
     if (!btn || btn.closest('#monacoEditorContainer')) return;
 

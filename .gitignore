@@ -1,11 +1,131 @@
-.venv
-__pycache__
-*/**/__pycache__
+# =========================
+# Python
+# =========================
 
-*/**/*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Compiled extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# =========================
+# Virtual environments
+# =========================
+
+.venv/
+venv/
+env/
+ENV/
+.env/
+.python-version
+
+# =========================
+# Environment variables
+# =========================
 
 .env
-*.db
+.env.*
+!.env.example
+
+# =========================
+# Testing
+# =========================
+
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+
+# =========================
+# Type checking
+# =========================
+
+.mypy_cache/
+.pyre/
+.pytype/
+.ruff_cache/
+
+# =========================
+# IDE / Editors
+# =========================
+
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# =========================
+# Jupyter
+# =========================
+
+.ipynb_checkpoints/
+
+# =========================
+# Logs
+# =========================
+
+*.log
+logs/
+
+# =========================
+# OS
+# =========================
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# FastAPI / Uvicorn
+# =========================
+
+*.pid
+
+# =========================
+# Local databases
+# =========================
+
 *.sqlite
+*.sqlite3
+*.db
+
 *.db-shm
 *.db-wal
+
+
+# =========================
+# Temporary files
+# =========================
+
+*.tmp
+*.temp
+.cache/
+tmp/
+temp/
